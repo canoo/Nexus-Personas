@@ -1,5 +1,7 @@
 # 🧠 Nexus-Personas
 
+[![Discord](https://img.shields.io/badge/Discord-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/qCdkHVkRHP)
+
 The official community vault and open registry of AI agent personas for the [NEXUS Framework](https://github.com/canoo/agent-nexus).
 
 Each persona is a standardized Markdown specification that instructs AI coding assistants (Claude Code, Gemini CLI, Kiro CLI, Cursor, etc.) to adopt specialized roles, tools, constraints, and mental models.
@@ -120,6 +122,8 @@ allowedTools:
 ## 🤝 Contributing
 
 We welcome community personas! Check out [CONTRIBUTING.md](./CONTRIBUTING.md) to learn how to structure and submit your custom AI specialist agent via Pull Request.
+
+Join our [Discord Community](https://discord.gg/qCdkHVkRHP) to brainstorm agent personas, get feedback, and discuss specialist design patterns.
 
 ---
 

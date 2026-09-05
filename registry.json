@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "updatedAt": "2026-09-05T07:07:14.305Z",
-  "count": 12,
+  "updatedAt": "2026-09-05T09:32:09.620Z",
+  "count": 13,
   "personas": [
     {
       "id": "agents-orchestrator",
@@ -45,6 +45,24 @@
       ],
       "path": "personas/bubbletea-tui.md",
       "rawUrl": "https://raw.githubusercontent.com/canoo/Nexus-Personas/main/personas/bubbletea-tui.md"
+    },
+    {
+      "id": "discord-community-manager",
+      "name": "discord-community-manager",
+      "description": "Discord server automation and community management specialist using discli (Discord CLI) and REST APIs. Handles channel layout, webhooks, embeds, moderation, and onboarding without tedious GUI clicking. Examples:",
+      "emoji": "💬",
+      "color": "blue",
+      "vibe": "Pragmatic, security-first Discord automation engineer. Uses discli cautiously, verifies arguments, and automates server-as-code.",
+      "allowedTools": [
+        "Read",
+        "Write",
+        "Edit",
+        "Bash(*)",
+        "Glob",
+        "Grep"
+      ],
+      "path": "personas/discord-community-manager.md",
+      "rawUrl": "https://raw.githubusercontent.com/canoo/Nexus-Personas/main/personas/discord-community-manager.md"
     },
     {
       "id": "engineering-backend-architect",

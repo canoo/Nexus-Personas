@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NexusPersona",
+  "type": "object",
+  "required": ["name", "description"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Human-readable name of the persona"
+    },
+    "description": {
+      "type": "string",
+      "description": "Short description of role and purpose"
+    },
+    "emoji": {
+      "type": "string",
+      "description": "Single emoji icon representing the persona"
+    },
+    "color": {
+      "type": "string",
+      "enum": ["green", "blue", "ruby", "amber", "purple", "cyan"],
+      "description": "Accent color category"
+    },
+    "vibe": {
+      "type": "string",
+      "description": "One-line operational vibe or behavioral summary"
+    },
+    "allowedTools": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "List of permitted tools (e.g. Read, Write, Bash(*), Grep)"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+name: Validate & Build Registry
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build and Validate Registry
+        run: |
+          node scripts/build-registry.js
+          git diff --exit-code registry.json || (echo "registry.json is out of date. Run 'node scripts/build-registry.js' and commit the changes." && exit 1)
+
+  dispatch-site-rebuild:
+    needs: validate
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger nexus-site rebuild
+        env:
+          GH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
+        run: |
+          if [ -n "$GH_TOKEN" ]; then
+            curl -s -X POST \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github.v3+json" \
+              https://api.github.com/repos/canoo/nexus-site/dispatches \
+              -d '{"event_type":"personas_updated"}' || true
+          fi

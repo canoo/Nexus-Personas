@@ -1,0 +1,9 @@
+{
+  "name": "nexus-personas",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-registry.js",
+    "test": "node --test scripts/build-registry.test.mjs"
+  }
+}

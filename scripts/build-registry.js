@@ -6,6 +6,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(__dirname, '..');
 const personasDir = path.join(rootDir, 'personas');
 const outputPath = path.join(rootDir, 'registry.json');
+// Release metadata is an explicit input, never the build machine's clock.
+const metadata = JSON.parse(fs.readFileSync(path.join(rootDir, 'registry-meta.json'), 'utf8'));
+if (typeof metadata.version !== 'string' || !metadata.version
+    || typeof metadata.updatedAt !== 'string'
+    || !Number.isFinite(Date.parse(metadata.updatedAt))) {
+  throw new Error('registry-meta.json requires a version and a valid updatedAt release date');
+}
 
 function parseFrontmatter(content) {
   const match = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
@@ -14,7 +21,6 @@ function parseFrontmatter(content) {
   const data = {};
   
   let currentKey = null;
-  let inList = false;
 
   for (const line of yamlBlock.split('\n')) {
     const trimmed = line.trim();
@@ -66,11 +72,11 @@ for (const file of files) {
   });
 }
 
-registry.sort((a, b) => a.id.localeCompare(b.id));
+registry.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
 
 const catalog = {
-  version: "1.0.0",
-  updatedAt: new Date().toISOString(),
+  version: metadata.version,
+  updatedAt: metadata.updatedAt,
   count: registry.length,
   personas: registry
 };

@@ -46,4 +46,10 @@ Following the frontmatter, format your agent spec with:
    node scripts/build-registry.js
    ```
 4. Open a Pull Request with a clear summary of what your specialist agent excels at.
-5. Automated validation checks will verify the format before community review.
+5. CI checks repeatable generation and whether the committed catalog matches the sources. Full YAML/schema validation remains a follow-up; this generator is not a complete YAML validator.
+
+## Reproducible catalog builds
+
+`registry-meta.json` owns the catalog version and release date (`updatedAt`). Keep these values unchanged for routine regeneration; update them intentionally when preparing a catalog release. `updatedAt` describes that release, not the time a developer ran the generator. Persona changes still appear immediately in regenerated entries.
+
+The generator uses no wall-clock timestamp and sorts IDs without depending on the machine's locale. Identical persona sources and release metadata produce identical catalog bytes. Run `npm test` for the isolated regression check. No dependencies need installation.

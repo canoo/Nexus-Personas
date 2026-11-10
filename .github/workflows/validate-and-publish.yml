@@ -18,6 +18,7 @@ jobs:
 
       - name: Build and Validate Registry
         run: |
+          node --test scripts/build-registry.test.mjs
           node scripts/build-registry.js
           git diff --exit-code registry.json || (echo "registry.json is out of date. Run 'node scripts/build-registry.js' and commit the changes." && exit 1)
 
